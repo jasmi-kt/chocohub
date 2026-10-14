@@ -1,0 +1,1055 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChocoHub | Handmade Happiness</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --brown: #4b241b;
+    --dark: #28130f;
+    --gold: #e8b96b;
+    --cream: #fff8ee;
+    --pink: #f6e4d8;
+}
+
+body {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* NAVBAR */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,248,238,.96);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 3px 18px #28130f12;
+}
+
+.navbar {
+    max-width: 1250px;
+    margin: auto;
+    min-height: 78px;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--brown);
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #c47b37;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+.nav-links a {
+    font-size: 14px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: #bc7734;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cart {
+    border: 1px solid #e4c9af;
+    background: white;
+    padding: 11px 15px;
+    border-radius: 30px;
+    color: var(--brown);
+    font-weight: bold;
+}
+
+.menu-btn {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 27px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 590px;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+    padding: 65px 8%;
+    gap: 35px;
+    color: white;
+    background:
+      linear-gradient(90deg, rgba(39,17,12,.97),
+      rgba(56,25,16,.83) 48%, rgba(39,17,12,.16)),
+      url('https://images.unsplash.com/photo-1548907040-4d42f4a3e4f5?auto=format&fit=crop&w=1800&q=85')
+      center/cover;
+}
+
+.hero-content {
+    max-width: 590px;
+    animation: appear 1s ease;
+}
+
+.eyebrow {
+    display: inline-block;
+    color: var(--gold);
+    border: 1px solid #e8b96b77;
+    border-radius: 30px;
+    padding: 9px 16px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(43px, 5.6vw, 75px);
+    line-height: 1.08;
+    margin-bottom: 23px;
+}
+
+.hero h1 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.hero p {
+    color: #f2e4d7;
+    line-height: 1.9;
+    font-size: 16px;
+    max-width: 480px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.btn-primary {
+    color: #32180f;
+    background: var(--gold);
+}
+
+.btn-primary:hover {
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px #0003;
+}
+
+.btn-outline {
+    color: white;
+    border: 1px solid #ffffff85;
+    background: transparent;
+    margin-left: 10px;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: var(--brown);
+}
+
+.hero-note {
+    margin-top: 35px;
+    color: #ead5c1;
+    font-size: 13px;
+}
+
+/* TRUST STRIP */
+
+.trust-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: white;
+    padding: 23px 5%;
+    gap: 15px;
+    text-align: center;
+    border-bottom: 1px solid #f0e1d2;
+}
+
+.trust-strip div {
+    font-size: 14px;
+    color: var(--brown);
+    font-weight: bold;
+}
+
+.trust-strip span {
+    display: block;
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+/* COMMON SECTIONS */
+
+section:not(.hero) {
+    scroll-margin-top: 85px;
+}
+
+.section {
+    padding: 85px 7%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 42px;
+}
+
+.section-heading small {
+    color: #b7773f;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(30px, 4vw, 43px);
+    margin: 13px 0;
+    color: var(--brown);
+}
+
+.section-heading p {
+    color: #806c60;
+    line-height: 1.8;
+}
+
+/* PRODUCTS */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.product-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 25px #51291b0b;
+    transition: .35s;
+    border: 1px solid #f0e5d9;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 35px #51291b1c;
+}
+
+.product-image {
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+    background: #f2e5d8;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+.tag {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    background: #fff8ee;
+    color: #713b23;
+    border-radius: 20px;
+    padding: 7px 11px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.product-info {
+    padding: 19px;
+}
+
+.product-info h3 {
+    color: var(--brown);
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.stars {
+    color: #d99a30;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.product-info p {
+    font-size: 12px;
+    color: #87766b;
+    line-height: 1.7;
+    min-height: 41px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.price {
+    color: var(--brown);
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.add-btn {
+    border: none;
+    background: var(--brown);
+    color: white;
+    padding: 11px 13px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.add-btn:hover {
+    background: #b8753b;
+}
+
+/* STORY */
+
+.story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: #f3e5d7;
+}
+
+.story-image {
+    height: 430px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 15px 15px 0 #d5b18e;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-content small {
+    color: #a46531;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.story-content h2 {
+    font-family: Georgia, serif;
+    color: var(--brown);
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.2;
+    margin: 20px 0;
+}
+
+.story-content p {
+    color: #735d50;
+    line-height: 1.9;
+    margin-bottom: 20px;
+}
+
+.story-points {
+    list-style: none;
+    margin: 20px 0 28px;
+}
+
+.story-points li {
+    margin: 15px 0;
+    font-size: 14px;
+    color: var(--brown);
+}
+
+/* SPECIAL OFFER */
+
+.offer {
+    margin: 0;
+    padding: 70px 7%;
+    color: white;
+    text-align: center;
+    background:
+      linear-gradient(#32180fe8, #32180fe8),
+      url('https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=1400&q=85')
+      center/cover;
+}
+
+.offer h2 {
+    font: bold clamp(30px, 4vw, 46px) Georgia, serif;
+    margin-bottom: 17px;
+}
+
+.offer p {
+    color: #ead8c7;
+    margin-bottom: 27px;
+    line-height: 1.8;
+}
+
+/* REVIEWS */
+
+.reviews {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1150px;
+    margin: auto;
+}
+
+.review-card {
+    padding: 28px;
+    border-radius: 13px;
+    background: white;
+    border: 1px solid #f0e3d6;
+}
+
+.review-card .stars {
+    font-size: 18px;
+}
+
+.review-card p {
+    color: #6f5c50;
+    font-size: 14px;
+    line-height: 1.9;
+    margin: 15px 0 22px;
+}
+
+.reviewer {
+    font-weight: bold;
+    color: var(--brown);
+}
+
+.reviewer span {
+    display: block;
+    font-size: 12px;
+    color: #9a8779;
+    margin-top: 5px;
+}
+
+/* NEWSLETTER */
+
+.newsletter {
+    text-align: center;
+    padding: 70px 7%;
+    background: #f3e4d5;
+}
+
+.newsletter h2 {
+    font: bold 36px Georgia, serif;
+    color: var(--brown);
+    margin-bottom: 15px;
+}
+
+.newsletter p {
+    color: #806c60;
+    margin-bottom: 25px;
+}
+
+.subscribe-form {
+    display: flex;
+    gap: 10px;
+    max-width: 480px;
+    margin: auto;
+}
+
+.subscribe-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px;
+    border: 1px solid #dec7b0;
+    border-radius: 7px;
+    background: white;
+    outline: none;
+}
+
+/* FOOTER */
+
+footer {
+    background: #24110d;
+    color: #f7e9da;
+    padding: 55px 7% 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 45px;
+}
+
+footer .logo {
+    color: white;
+    margin-bottom: 17px;
+    display: inline-block;
+}
+
+footer p {
+    color: #c7afa0;
+    font-size: 13px;
+    line-height: 1.9;
+    max-width: 380px;
+}
+
+footer h4 {
+    margin-bottom: 18px;
+}
+
+.footer-links a {
+    display: block;
+    font-size: 13px;
+    color: #d2bcae;
+    margin-bottom: 13px;
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+}
+
+.copyright {
+    max-width: 1200px;
+    border-top: 1px solid #ffffff20;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* NOTIFICATION */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #32180f;
+    color: white;
+    padding: 16px 22px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px #0003;
+    z-index: 2000;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: .3s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1000px) {
+    .nav-links { gap: 15px; }
+    .products { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding: 60px 6%; }
+}
+
+@media(max-width: 720px) {
+    .navbar { min-height: 70px; }
+    .menu-btn { display: block; }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--cream);
+        padding: 25px;
+        flex-direction: column;
+        box-shadow: 0 10px 20px #0001;
+    }
+
+    .nav-links.active { display: flex; }
+    .nav-actions { margin-left: auto; }
+    .logo { font-size: 23px; }
+    .cart { padding: 9px 11px; font-size: 12px; }
+
+    .hero {
+        grid-template-columns: 1fr;
+        min-height: 550px;
+        padding: 65px 7%;
+        background-position: center;
+    }
+
+    .hero h1 { font-size: 48px; }
+    .trust-strip { grid-template-columns: repeat(2, 1fr); }
+    .section { padding: 60px 6%; }
+    .products { gap: 13px; }
+    .product-image { height: 180px; }
+    .product-info { padding: 13px; }
+    .product-info h3 { font-size: 15px; }
+    .price-row { flex-wrap: wrap; }
+    .add-btn { padding: 10px; }
+    .story { grid-template-columns: 1fr; gap: 35px; }
+    .story-image { height: 300px; }
+    .reviews { grid-template-columns: 1fr; }
+    .footer-content { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .footer-about { grid-column: 1 / -1; }
+    .newsletter h2 { font-size: 29px; }
+}
+
+@media(max-width: 380px) {
+    .hero h1 { font-size: 39px; }
+    .products { grid-template-columns: 1fr; }
+    .product-image { height: 230px; }
+    .btn { padding: 13px 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <a class="logo" href="#home">🍫 Choco<span>Hub</span></a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#products">Our Chocolates</a>
+            <a href="#story">Our Story</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <button class="cart" onclick="showCart()">
+                🛒 Cart (<span id="cartCount">0</span>)
+            </button>
+            <button class="menu-btn" onclick="toggleMenu()"
+                aria-label="Toggle navigation">☰</button>
+        </div>
+    </nav>
+</header>
+
+<!-- HERO SECTION -->
+
+<main>
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="eyebrow">HANDCRAFTED WITH LOVE</span>
+
+        <h1>Happiness is<br>
+            <span>Homemade</span><br>
+            Chocolate.</h1>
+
+        <p>
+            Discover the magic of handcrafted chocolates made
+            in small batches with love, rich cocoa and a little
+            sprinkle of happiness. Every bite tells a story.
+        </p>
+
+        <a href="#products" class="btn btn-primary">
+            Explore Chocolates →
+        </a>
+
+        <a href="#story" class="btn btn-outline">
+            Our Story
+        </a>
+
+        <div class="hero-note">
+            ✨ Made with love &nbsp; • &nbsp;
+            🍫 Crafted by hand &nbsp; • &nbsp;
+            🎁 Perfect for gifting
+        </div>
+    </div>
+</section>
+
+<!-- TRUST STRIP -->
+
+<div class="trust-strip">
+    <div><span>🍫</span>Handcrafted Treats</div>
+    <div><span>💝</span>Made with Love</div>
+    <div><span>🎁</span>Gift-Worthy Goodness</div>
+    <div><span>🌿</span>Quality Ingredients</div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+
+<section class="section" id="products">
+    <div class="section-heading">
+        <small>Our Chocolate Collection</small>
+        <h2>A Little Box of Happiness</h2>
+        <p>Find your favourite flavour and make every moment sweeter.</p>
+    </div>
+
+    <div class="products">
+
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=85"
+                     alt="Rich dark chocolate pieces" loading="lazy">
+                <span class="tag">BESTSELLER</span>
+            </div>
+            <div class="product-info">
+                <h3>Classic Dark Chocolate</h3>
+                <div class="stars">★★★★★ <span style="color:#88766a">4.9</span></div>
+                <p>Deep cocoa flavour for true chocolate lovers.</p>
+                <div class="price-row">
+                    <span class="price">₹199</span>
+                    <button class="add-btn"
+                        onclick="addToCart('Classic Dark Chocolate',199)">
+                        + Add
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=700&q=85"
+                     alt="Milk chocolate assortment" loading="lazy">
+                <span class="tag">FAN FAVOURITE</span>
+            </div>
+            <div class="product-info">
+                <h3>Creamy Milk Chocolate</h3>
+                <div class="stars">★★★★★ <span style="color:#88766a">4.8</span></div>
+                <p>Silky, smooth and wonderfully comforting.</p>
+                <div class="price-row">
+                    <span class="price">₹179</span>
+                    <button class="add-btn"
+                        onclick="addToCart('Creamy Milk Chocolate',179)">
+                        + Add
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=700&q=85"
+                     alt="Luxury assorted handmade chocolates" loading="lazy">
+                <span class="tag">PREMIUM</span>
+            </div>
+            <div class="product-info">
+                <h3>Luxury Truffle Box</h3>
+                <div class="stars">★★★★★ <span style="color:#88766a">5.0</span></div>
+                <p>Delightful chocolate bites for special moments.</p>
+                <div class="price-row">
+                    <span class="price">₹349</span>
+                    <button class="add-btn"
+                        onclick="addToCart('Luxury Truffle Box',349)">
+                        + Add
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=700&q=85"
+                     alt="Chocolate gift selection" loading="lazy">
+                <span class="tag">GIFT SPECIAL</span>
+            </div>
+            <div class="product-info">
+                <h3>Chocolate Gift Box</h3>
+                <div class="stars">★★★★★ <span style="color:#88766a">4.9</span></div>
+                <p>A sweet surprise for birthdays and celebrations.</p>
+                <div class="price-row">
+                    <span class="price">₹499</span>
+                    <button class="add-btn"
+                        onclick="addToCart('Chocolate Gift Box',499)">
+                        + Add
+                    </button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <div style="text-align:center;margin-top:35px">
+        <button class="btn btn-primary"
+            onclick="showToast('Your full collection is coming soon!')">
+            Discover More Flavours →
+        </button>
+    </div>
+</section>
+
+<!-- OUR STORY -->
+
+<section class="section story" id="story">
+    <div class="story-image">
+        <img src="https://images.unsplash.com/photo-1575377427642-087cf684f29d?auto=format&fit=crop&w=1000&q=85"
+             alt="Chocolate making ingredients and cocoa" loading="lazy">
+    </div>
+
+    <div class="story-content">
+        <small>THE CHOCOHUB STORY</small>
+        <h2>From Our Little Kitchen to Your Heart.</h2>
+        <p>
+            ChocoHub began with a simple dream: to turn ordinary
+            ingredients into extraordinary moments of happiness.
+            Our homemade chocolate collection is inspired by the
+            joy of sharing something sweet with the people we love.
+        </p>
+        <p>
+            We believe that every chocolate deserves care, every
+            flavour deserves attention, and every customer deserves
+            a memorable experience.
+        </p>
+
+        <ul class="story-points">
+            <li>🤎 Small-batch chocolate making</li>
+            <li>🍫 Carefully selected ingredients</li>
+            <li>🎀 Thoughtful packaging and gifting</li>
+        </ul>
+
+        <a href="#products" class="btn btn-primary">Taste the Love →</a>
+    </div>
+</section>
+
+<!-- SPECIAL OFFER -->
+
+<section class="offer">
+    <h2>Make Someone's Day Sweeter with  🍫</h2>
+    <p>
+        A birthday, an anniversary or just because —
+        handmade chocolates make every moment special.
+    </p>
+    <a href="#products" class="btn btn-primary">
+        Find Your Sweet Gift →
+    </a>
+</section>
+
+<!-- CUSTOMER REVIEWS -->
+
+<section class="section" id="reviews">
+    <div class="section-heading">
+        <small>Sweet Words</small>
+        <h2>Love at First Bite</h2>
+        <p>Every chocolate has a story. Every smile makes ours sweeter.</p>
+    </div>
+
+    <div class="reviews">
+        <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+                "The chocolate was so rich and delicious!
+                The beautiful presentation made it even more
+                special. Perfect for gifting."
+            </p>
+            <div class="reviewer">Ananya R.
+                <span>Chocolate lover</span>
+            </div>
+        </article>
+
+        <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+                "Loved the homemade touch and the lovely
+                flavours. The gift box was beautiful and
+                made my celebration extra sweet."
+            </p>
+            <div class="reviewer">Meera S.
+                <span>Happy customer</span>
+            </div>
+        </article>
+
+        <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>
+                "A wonderful idea for chocolate lovers.
+                The packaging looks premium, and there is
+                something special about handmade treats."
+            </p>
+            <div class="reviewer">Arjun K.
+                <span>Chocolate enthusiast</span>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+
+<section class="newsletter" id="contact">
+    <h2>A Sweet Surprise Awaits!</h2>
+    <p>Join the ChocoHub family for new flavours and special offers.</p>
+
+    <form class="subscribe-form" id="subscribeForm">
+        <input type="email" id="emailInput"
+            placeholder="Enter your email address" required>
+        <button type="submit" class="btn btn-primary">
+            Join Us
+        </button>
+    </form>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-about">
+            <a class="logo" href="#home">🍫 Choco<span>Hub</span></a>
+            <p>
+                Homemade happiness, wrapped in chocolate.
+                Discover handmade treats created to make
+                your everyday moments a little more magical.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="#home">Home</a>
+            <a href="#products">Our Chocolates</a>
+            <a href="#story">Our Story</a>
+            <a href="#reviews">Customer Reviews</a>
+        </div>
+
+        <div class="footer-links">
+            <h4>Get in Touch</h4>
+            <a href="#contact">Contact Us</a>
+            <a href="#products">Gift Collections</a>
+            <a href="#contact">Join Our Newsletter</a>
+            <p>Made with 🤎 by ChocoHub</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © <span id="year"></span> ChocoHub. All rights reserved.
+        Handmade with love 🍫
+    </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+let cart = [];
+let toastTimer;
+
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+}
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('active');
+    });
+});
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2800);
+}
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+
+    document.getElementById('cartCount').textContent = cart.length;
+
+    showToast('🍫 ' + name + ' added to your cart!');
+}
+
+function showCart() {
+    if (cart.length === 0) {
+        showToast('Your cart is empty. Find your favourite chocolate!');
+        return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    const summary = cart.map(item => item.name).join(', ');
+
+    showToast(
+        cart.length + ' item(s) | Total: ₹' + total
+    );
+
+    alert(
+        'YOUR CHOCOHUB CART\n\n' +
+        summary +
+        '\n\nTotal: ₹' + total +
+        '\n\nThis is a demo cart. Online checkout is not connected yet.'
+    );
+}
+
+document.getElementById('subscribeForm').addEventListener('submit',
+    function(event) {
+        event.preventDefault();
+
+        const email = document.getElementById('emailInput').value;
+
+        showToast('Thank you for your interest in ChocoHub! 🤎');
+
+        this.reset();
+
+        // Connect an email marketing service to save subscribers.
+    }
+);
+
+document.getElementById('year').textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChocoHub | Our Chocolates</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brown: #51251e;
+    --dark: #32130f;
+    --pink: #ffb6c8;
+    --cream: #fff7ed;
+    --orange: #ffb347;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fff9f5;
+    color: var(--dark);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+header {
+    background: linear-gradient(100deg, #4b211a, #793b2c);
+    color: white;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #ffbdc9;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #ffc2d0;
+}
+
+.cart {
+    background: #fff;
+    color: #51251e;
+    padding: 10px 16px;
+    border-radius: 25px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.hero {
+    min-height: 300px;
+    padding: 55px 7%;
+    display: flex;
+    align-items: center;
+    color: white;
+    background:
+        linear-gradient(90deg, rgba(40,15,10,.88), rgba(40,15,10,.2)),
+        url("https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 5vw, 57px);
+    margin-bottom: 14px;
+}
+
+.hero h1 span {
+    color: #ffc0cb;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.hero a {
+    display: inline-block;
+    background: #ffb6c8;
+    color: #401911;
+    text-decoration: none;
+    padding: 13px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.hero a:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+.container {
+    width: 90%;
+    max-width: 1250px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    margin: 45px 0 10px;
+    font-size: 34px;
+    color: #51251e;
+}
+
+.subtitle {
+    text-align: center;
+    color: #896b62;
+    margin-bottom: 25px;
+}
+
+.search-area {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ead8d0;
+    border-radius: 30px;
+    padding: 0 18px;
+    width: min(100%, 420px);
+    box-shadow: 0 4px 15px #51251e0b;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 14px 10px;
+    font-size: 15px;
+    background: transparent;
+}
+
+.category {
+    border: 1px solid #e4c5b9;
+    padding: 12px 18px;
+    border-radius: 25px;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    color: #51251e;
+    transition: .2s;
+}
+
+.category.active,
+.category:hover {
+    background: #51251e;
+    color: white;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    padding-bottom: 50px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #f0e1da;
+    box-shadow: 0 8px 25px #51251e0b;
+    transition: transform .3s, box-shadow .3s;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.product-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px #51251e18;
+}
+
+.product-image {
+    position: relative;
+    height: 225px;
+    overflow: hidden;
+    background: #f5e4d9;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.06);
+}
+
+.tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 7px 12px;
+    border-radius: 20px;
+    background: #ffb6c8;
+    color: #51251e;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.wishlist {
+    position: absolute;
+    right: 13px;
+    top: 12px;
+    width: 37px;
+    height: 37px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.wishlist.liked {
+    color: #e53866;
+}
+
+.product-info {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.product-info h3 {
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.rating {
+    color: #e99b19;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.rating span {
+    color: #806b63;
+    margin-left: 5px;
+}
+
+.description {
+    color: #826c63;
+    line-height: 1.5;
+    font-size: 14px;
+    margin-bottom: 13px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 15px;
+}
+
+.price {
+    font-size: 23px;
+    color: #6b3024;
+    font-weight: 800;
+}
+
+.unit {
+    font-size: 12px;
+    color: #927b70;
+}
+
+.ingredients {
+    background: #fff7f1;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    flex: 1;
+}
+
+.ingredients strong {
+    color: #6b3024;
+}
+
+.review {
+    font-size: 13px;
+    color: #765d54;
+    border-left: 3px solid #ffb6c8;
+    padding-left: 10px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.review b {
+    color: #51251e;
+}
+
+.buy-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e7d5ce;
+    border-radius: 25px;
+    overflow: hidden;
+    height: 43px;
+}
+
+.quantity button {
+    width: 31px;
+    height: 100%;
+    border: none;
+    background: #fff5ef;
+    font-size: 19px;
+    cursor: pointer;
+    color: #51251e;
+}
+
+.quantity span {
+    min-width: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.add-btn {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-radius: 25px;
+    padding: 13px 8px;
+    background: #51251e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.add-btn:hover {
+    background: #a44e3c;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 45px 10px;
+    color: #896b62;
+    font-size: 18px;
+}
+
+.benefits {
+    background: #fff0e8;
+    padding: 35px 5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.benefits div {
+    padding: 12px;
+}
+
+.benefits .emoji {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.benefits h3 {
+    margin-bottom: 8px;
+    color: #51251e;
+}
+
+.benefits p {
+    color: #896b62;
+    font-size: 14px;
+}
+
+footer {
+    background: #32130f;
+    color: #fce8df;
+    padding: 30px 6%;
+    text-align: center;
+    line-height: 1.8;
+}
+
+footer strong {
+    color: #ffb6c8;
+    font-size: 23px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 100px);
+    opacity: 0;
+    background: #32130f;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 30px;
+    box-shadow: 0 5px 25px #0002;
+    transition: .3s;
+    z-index: 100;
+    text-align: center;
+    width: max-content;
+    max-width: 90%;
+}
+
+.toast.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+}
+
+@media (max-width: 950px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 14px;
+    }
+
+    .hero {
+        padding: 45px 6%;
+        min-height: 290px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        height: 250px;
+    }
+
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🍫 Choco<span>Hub</span></div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#products">Products</a>
+        <a href="#why-us">Why ChocoHub?</a>
+    </nav>
+
+    <div class="cart">🛒 Cart: <span id="cart-count">0</span></div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>A Little Bite of <span>Happiness!</span></h1>
+        <p>
+            Handmade with love, made with care, and filled with chocolate magic.
+            Discover your new favourite treat at ChocoHub.
+        </p>
+        <a href="#products">Explore Our Chocolates →</a>
+    </div>
+</section>
+
+<main class="container" id="products">
+    <h2 class="section-title">Our Chocolate Collection 🍫</h2>
+    <p class="subtitle">Handcrafted happiness for every chocolate lover.</p>
+
+    <div class="search-area">
+        <div class="search-box">
+            <span>🔍</span>
+            <input type="search" id="search"
+                placeholder="Search chocolates, flavours..."
+                aria-label="Search chocolates">
+        </div>
+
+        <button class="category active" data-category="All">All Products</button>
+        <button class="category" data-category="Dark">Dark</button>
+        <button class="category" data-category="Milk">Milk</button>
+        <button class="category" data-category="Nutty">Nutty</button>
+        <button class="category" data-category="Special">Special</button>
+    </div>
+
+    <div class="product-grid" id="product-grid"></div>
+</main>
+
+<section class="benefits" id="why-us">
+    <div>
+        <div class="emoji">🍫</div>
+        <h3>Handmade with Love</h3>
+        <p>Every batch is carefully prepared in small quantities.</p>
+    </div>
+    <div>
+        <div class="emoji">🌿</div>
+        <h3>Quality Ingredients</h3>
+        <p>Delicious recipes made with carefully selected ingredients.</p>
+    </div>
+    <div>
+        <div class="emoji">🎁</div>
+        <h3>Perfect for Gifting</h3>
+        <p>Sweet little surprises for birthdays and special moments.</p>
+    </div>
+</section>
+
+<footer>
+    <strong>🍫 ChocoHub</strong>
+    <p>Handmade chocolates. Heartfelt happiness.</p>
+    <p>Contact: hello@chocohub.example</p>
+    <p>© 2026 ChocoHub. Made with ❤️ and chocolate.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const products = [
+    {
+        id: 1,
+        name: "Classic Milk Chocolate",
+        category: "Milk",
+        price: 149,
+        weight: "100 g",
+        rating: 4.8,
+        reviews: 128,
+        tag: "Bestseller",
+        image: "https://images.unsplash.com/photo- milk",
+        description: "Creamy, smooth chocolate that melts in your mouth.",
+        ingredients: "Cocoa butter, cocoa solids, milk powder, sugar, vanilla.",
+        review: "So creamy and delicious! My whole family loved it.",
+        reviewer: "Anu M."
+    },
+    {
+        id: 2,
+        name: "Dark Chocolate Bliss",
+        category: "Dark",
+        price: 179,
+        weight: "100 g",
+        rating: 4.9,
+        reviews: 96,
+        tag: "Rich & Bold",
+        image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80",
+        description: "A rich cocoa experience for true dark chocolate lovers.",
+        ingredients: "Cocoa solids, cocoa butter, sugar, vanilla.",
+        review: "Perfect dark chocolate flavour. Rich but balanced.",
+        reviewer: "Rahul K."
+    },
+    {
+        id: 3,
+        name: "Almond Crunch",
+        category: "Nutty",
+        price: 199,
+        weight: "100 g",
+        rating: 4.7,
+        reviews: 84,
+        tag: "Customer Favourite",
+        image: "https://images.unsplash.com/photo-1548907040-4d42faa7f0ad?auto=format&fit=crop&w=800&q=80",
+        description: "Smooth chocolate loaded with crunchy almond pieces.",
+        ingredients: "Milk chocolate, roasted almonds, cocoa butter, sugar.",
+        review: "The almond crunch makes every bite special!",
+        reviewer: "Meera S."
+    },
+    {
+        id: 4,
+        name: "Chocolate Truffles",
+        category: "Special",
+        price: 249,
+        weight: "6 pieces",
+        rating: 4.9,
+        reviews: 72,
+        tag: "Luxury Treat",
+        image: "https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=800&q=80",
+        description: "Soft, velvety chocolate truffles for a luxurious treat.",
+        ingredients: "Chocolate, cream, cocoa powder, butter.",
+        review: "Beautifully rich and a wonderful gift!",
+        reviewer: "Diya P."
+    },
+    {
+        id: 5,
+        name: "Hazelnut Chocolate",
+        category: "Nutty",
+        price: 219,
+        weight: "100 g",
+        rating: 4.8,
+        reviews: 105,
+        tag: "Popular",
+        image: "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=800&q=80",
+        description: "A delicious blend of chocolate and roasted hazelnuts.",
+        ingredients: "Cocoa solids, hazelnuts, milk powder, sugar, cocoa butter.",
+        review: "Wonderful hazelnut flavour and a lovely texture.",
+        reviewer: "Neha R."
+    },
+    {
+        id: 6,
+        name: "Strawberry Chocolate",
+        category: "Special",
+        price: 189,
+        weight: "100 g",
+        rating: 4.6,
+        reviews: 61,
+        tag: "Sweet & Fruity",
+        image: "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=800&q=80",
+        description: "A fruity twist with a sweet strawberry-inspired flavour.",
+        ingredients: "Chocolate, strawberry flavouring, cocoa butter, sugar, milk powder.",
+        review: "A fun, fruity treat. Great for gifting!",
+        reviewer: "Akhila T."
+    }
+];
+
+let activeCategory = "All";
+let cartCount = 0;
+let toastTimer;
+
+const grid = document.getElementById("product-grid");
+const searchInput = document.getElementById("search");
+
+function renderProducts() {
+    const term = searchInput.value.trim().toLowerCase();
+
+    const filtered = products.filter(product => {
+        const matchesCategory =
+            activeCategory === "All" || product.category === activeCategory;
+
+        const searchable = (
+            product.name + " " +
+            product.category + " " +
+            product.description + " " +
+            product.ingredients
+        ).toLowerCase();
+
+        return matchesCategory && searchable.includes(term);
+    });
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `
+            <div class="empty">
+                🍫 No chocolates found.<br><br>
+                Try another name or category!
+            </div>`;
+        return;
+    }
+
+    grid.innerHTML = filtered.map(product => `
+        <article class="product-card">
+            <div class="product-image">
+                <img src="${product.image}"
+                     alt="${product.name}"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/f3dfd3/51251e?text=ChocoHub+Chocolate'">
+                <span class="tag">${product.tag}</span>
+                <button class="wishlist"
+                        aria-label="Add ${product.name} to favourites"
+                        onclick="toggleWishlist(this)">♡</button>
+            </div>
+
+            <div class="product-info">
+                <h3>${product.name}</h3>
+
+                <div class="rating">
+                    ★★★★★ <span>${product.rating}/5 (${product.reviews} reviews)</span>
+                </div>
+
+                <p class="description">${product.description}</p>
+
+                <div class="price-row">
+                    <div class="price">₹${product.price}
+                        <span class="unit">/ ${product.weight}</span>
+                    </div>
+                </div>
+
+                <div class="ingredients">
+                    <strong>🌿 Ingredients</strong><br>
+                    ${product.ingredients}
+                </div>
+
+                <div class="review">
+                    “${product.review}”
+                    <br><b>— ${product.reviewer}</b>
+                    <br><small>Sample review for demo purposes</small>
+                </div>
+
+                <div class="buy-row">
+                    <div class="quantity">
+                        <button aria-label="Decrease quantity"
+                                onclick="changeQty(${product.id}, -1)">−</button>
+                        <span id="qty-${product.id}">1</span>
+                        <button aria-label="Increase quantity"
+                                onclick="changeQty(${product.id}, 1)">+</button>
+                    </div>
+
+                    <button class="add-btn"
+                            onclick="addToCart(${product.id})">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+        </article>
+    `).join("");
+}
+
+function changeQty(id, change) {
+    const qtyElement = document.getElementById("qty-" + id);
+    const current = Number(qtyElement.textContent);
+    qtyElement.textContent = Math.max(1, Math.min(99, current + change));
+}
+
+function addToCart(id) {
+    const product = products.find(item => item.id === id);
+    const qty = Number(document.getElementById("qty-" + id).textContent);
+
+    cartCount += qty;
+    document.getElementById("cart-count").textContent = cartCount;
+    showToast(`${qty} × ${product.name} added to your cart! 🍫`);
+}
+
+function toggleWishlist(button) {
+    button.classList.toggle("liked");
+    button.textContent = button.classList.contains("liked") ? "♥" : "♡";
+    showToast(button.classList.contains("liked")
+        ? "Added to your favourites ❤️"
+        : "Removed from your favourites");
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
+}
+
+searchInput.addEventListener("input", renderProducts);
+
+document.querySelectorAll(".category").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelector(".category.active").classList.remove("active");
+        button.classList.add("active");
+        activeCategory = button.dataset.category;
+        renderProducts();
+    });
+});
+
+renderProducts();
+</script>
+
+</body>
+</html>
